@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.svg" type="image/svg+xml" />
+  <title>Atria · Productividad Académica</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <h1>Atria</h1>
+      <nav>
+        <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+        <button class="nav-btn" data-view="tasks">Tareas</button>
+        <button class="nav-btn" data-view="create">Crear tarea</button>
+        <button class="nav-btn" data-view="stats">Estadísticas</button>
+      </nav>
+      <button id="enableNotifications" class="secondary">Activar notificaciones</button>
+    </aside>
+
+    <main class="main">
+      <section id="dashboard" class="view active"></section>
+      <section id="tasks" class="view"></section>
+      <section id="create" class="view"></section>
+      <section id="stats" class="view"></section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-view="dashboard">Inicio</button>
+      <button class="nav-btn" data-view="tasks">Tareas</button>
+      <button class="nav-btn" data-view="create">Crear</button>
+      <button class="nav-btn" data-view="stats">Stats</button>
+    </nav>
+  </div>
+
+  <dialog id="taskModal"></dialog>
+
+  <template id="taskFormTemplate">
+    <form id="taskForm" class="card form-grid">
+      <h2 id="formTitle">Crear tarea</h2>
+      <label>Título* <input name="title" minlength="3" required /></label>
+      <label>Materia* <input name="subject" required /></label>
+      <label>Descripción <textarea name="description" rows="3"></textarea></label>
+      <label>Fecha de entrega* <input type="date" name="dueDate" required /></label>
+      <label>Prioridad
+        <select name="priority">
+          <option value="alta">Alta</option>
+          <option value="media" selected>Media</option>
+          <option value="baja">Baja</option>
+        </select>
+      </label>
+      <label>Estado
+        <select name="status">
+          <option value="pendiente">Pendiente</option>
+          <option value="en progreso">En progreso</option>
+          <option value="terminada">Terminada</option>
+          <option value="entregada">Entregada</option>
+        </select>
+      </label>
+      <label>Tipo de entrega
+        <select name="deliveryType" id="deliveryTypeSelect">
+          <option value="fisica">Física</option>
+          <option value="virtual">Virtual</option>
+        </select>
+      </label>
+      <label id="deliveryLinkWrap">Enlace de entrega <input name="deliveryLink" type="url" placeholder="https://..." /></label>
+      <label>Archivos/evidencias <input name="files" type="file" multiple /></label>
+      <div class="form-actions">
+        <button type="button" id="generateDescription" class="secondary">Generar descripción automática</button>
+        <button type="submit">Guardar</button>
+      </div>
+      <p id="formError" class="error"></p>
+    </form>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
